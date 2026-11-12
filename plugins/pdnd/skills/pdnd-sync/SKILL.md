@@ -24,11 +24,10 @@ Paths below are relative to the folder that contains this `SKILL.md`. Read first
    3. Merge `<remote>/<base>` into the branch.
    4. Resolve the conflicts. Keep both sides' intent: the PR follows its ticket, the base brings everyone else's work. Apply "Stop And Ask" for any conflict that needs a decision.
    5. Check what the merge broke even without conflicts: for example a code or constant the PR adds that the base now uses for something else. Renumber or rename on the PR side and update the PR description if it cites the old value.
-   6. Run the verification for the packages the merge touched.
-   7. Commit with the default merge message, check the fast-forward, push.
+   6. Commit with the default merge message, check the fast-forward, push. Do not run builds, typecheck, lint, or tests: the CI checks every pushed PR.
 5. Go back to the branch checked out at the start.
-6. Re-read `mergeable` and `mergeStateStatus` of every PR you pushed.
+6. Re-read `mergeable` and `mergeStateStatus` of every PR you pushed. Do not wait for the checks.
 
 ## Report
 
-One table: repository, PR, what was wrong (behind or conflict), how you resolved it, checks run, new GitHub status. List the PRs left as they are, with the reason.
+One table: repository, PR, what was wrong (behind or conflict), how you resolved it, new GitHub status. Say that no local verification ran and the CI checks are pending. List the PRs left as they are, with the reason.

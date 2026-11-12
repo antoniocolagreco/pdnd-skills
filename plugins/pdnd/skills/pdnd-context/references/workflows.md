@@ -10,7 +10,7 @@ Check the dependencies before the first step of any skill of this plugin.
 | --- | --- | --- |
 | GitHub CLI, logged in | every skill | `gh auth status` shows an active account |
 | Atlassian MCP server | every skill | Jira tools are available (for example **getJiraIssue**) and a read of one known issue succeeds |
-| Node and pnpm | `pdnd-work`, `pdnd-sync`, `pdnd-merge` | `node -v` satisfies `engines` in the repository's root `package.json`; `pnpm -v` matches its `packageManager` |
+| Node and pnpm | `pdnd-work` | `node -v` satisfies `engines` in the repository's root `package.json`; `pnpm -v` matches its `packageManager` |
 
 If one is missing, stop at once and explain to the user how to install it, with the commands for their system and harness from "Install Instructions". Give only the commands that apply: detect the system with `uname -s` and `/etc/os-release`, and name the harness you are running in. Then wait. Never install, log in, or change credentials yourself: they need the user's account.
 
@@ -87,6 +87,8 @@ The project lives in the `pagopa` GitHub org. A repository belongs to it when it
 - Check `git branch --show-current` before every commit.
 
 ## Verification
+
+`pdnd-sync` and `pdnd-merge` skip local verification: the CI checks every pushed PR. The rules below apply to `pdnd-work`.
 
 - Build the shared packages you changed (`pnpm build --filter <package>`), then trust `npx tsc -p tsconfig.check.json` in each changed package, not the editor.
 - If the lockfile or a `package.json` changed, run `pnpm install --frozen-lockfile --offline`.
