@@ -17,19 +17,19 @@ The skills live in `plugins/pdnd/skills/`. The workflow skills read `pdnd-contex
 
 ## Install
 
-Claude Code (commands `/pdnd:pdnd-context`, `/pdnd:pdnd-align`, ...):
+Claude Code (commands `/pdnd:pdnd-context`, `/pdnd:pdnd-align`, ...), inside a session:
 
-```bash
-claude plugin marketplace add antoniocolagreco/pdnd-skills
-claude plugin install pdnd@pdnd-skills
+```text
+/plugin marketplace add antoniocolagreco/pdnd-skills
+/plugin install pdnd@pdnd-skills
+/reload-plugins
 ```
 
-Codex:
+Codex, inside a session:
 
-```bash
-codex plugin marketplace add antoniocolagreco/pdnd-skills
-codex plugin add pdnd@pdnd-skills
-```
+1. Run `/plugins`.
+2. Choose "Add a marketplace" and enter `antoniocolagreco/pdnd-skills`.
+3. Select `pdnd` and press Enter to install it.
 
 Harnesses without plugin marketplaces: copy or link the folders in `plugins/pdnd/skills/` into the harness's skills folder (for example `~/.agents/skills`).
 
