@@ -1,0 +1,12 @@
+{
+  "name": "pdnd-skills",
+  "description": "Claude Code plugins for PDND Interoperability",
+  "owner": { "name": "Antonio Colagreco" },
+  "plugins": [
+    {
+      "name": "pdnd",
+      "source": "./plugins/pdnd",
+      "description": "PDND Interoperability: project context, Jira status alignment"
+    }
+  ]
+}

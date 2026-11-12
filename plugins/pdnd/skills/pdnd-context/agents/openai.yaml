@@ -1,0 +1,4 @@
+interface:
+  display_name: "PDND Context"
+  short_description: "PDND backend, tickets, Git, debug"
+  default_prompt: "Use $pdnd-context to work on the PDND backend monorepo with repository conventions, architecture context, Jira/Confluence discovery, PagoPA GitHub workflow rules, and bug reproduction guidance."
