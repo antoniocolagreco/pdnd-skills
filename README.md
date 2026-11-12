@@ -33,6 +33,21 @@ Codex, inside a session:
 
 Harnesses without plugin marketplaces: copy or link the folders in `plugins/pdnd/skills/` into the harness's skills folder (for example `~/.agents/skills`).
 
+## Update
+
+Claude Code, inside a session:
+
+```text
+/plugin marketplace update pdnd-skills
+/reload-plugins
+```
+
+Codex: `codex plugin marketplace upgrade pdnd-skills` from the shell, then start a new session.
+
+## Development
+
+Every change to the skills needs a higher `version` in `plugins/pdnd/.claude-plugin/plugin.json`. The harnesses cache the plugin by version: without a new version, an update keeps the old files.
+
 For local development, add the marketplace from the clone path instead of `owner/repo`. Claude Code reads a local marketplace in place. Codex copies the plugin into its cache, so reinstall it after each change.
 
 ## Harness notes
