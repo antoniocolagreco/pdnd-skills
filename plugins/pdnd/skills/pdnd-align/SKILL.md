@@ -1,6 +1,6 @@
 ---
 name: pdnd-align
-description: Align the user's PDND Jira ticket statuses (In progress, In review, Ready to Dev, Dev) with the state of their PRs in every pagopa pdnd/interop repository. Run only when the user asks for it.
+description: Align the user's PDND Jira ticket statuses (In progress, In review, Ready to Dev) with the state of their PRs in every pagopa pdnd/interop repository. Run only when the user asks for it.
 disable-model-invocation: true
 ---
 

@@ -1,6 +1,6 @@
 # Jira Status
 
-Source: Confluence page `2136113416` ("[DRAFT] Processo di sviluppo"), section 4.1. Read it again if the user questions a status.
+Source: Confluence page `2136113416` ("[DRAFT] Processo di sviluppo"), section 4.1. The page describes `Ready to Dev` and `Dev` differently: the team rules below win.
 
 ## Status Meaning
 
@@ -8,13 +8,11 @@ Source: Confluence page `2136113416` ("[DRAFT] Processo di sviluppo"), section 4
 | --- | --- |
 | `💾 In progress` | Development started, no PR yet. |
 | `💾 In review` | The work is finished and the PR is open, draft or ready. Jira automation sets it when a PR is opened. |
-| `💾 Ready to Dev` | The PR is merged into a feature branch, not yet into `develop`. Only on a feature board (issue under an Epic). |
-| `💾 Dev` | The PR is merged into `develop`. A merge into `develop` deploys to DEV automatically. |
+| `💾 Ready to Dev` | The PR is merged, into `develop` or into a `feature/*` branch. |
+| `💾 Dev` | Deployed to the DEV environment. Only whoever deploys moves it: the deploy is manual and is not visible from the PRs. |
 | `💾 QA`, `Ready to Collaudo`, `Collaudo`, `Done` | Moved by QA, the Feature Lead, or whoever deploys. |
 
-Hotfix, Small Activity, and Refactor tickets (Mixed Activities board) skip `Ready to Dev`: they go from `In review` to `Dev`.
-
-The user manages only `In progress`, `In review`, `Ready to Dev`, and `Dev`. Never move a ticket into another status, and never move a ticket that is in another status (`To do`, `Blocked`, `Rejected`, `QA` and later): report it.
+The user manages only `In progress`, `In review`, and `Ready to Dev`. Never move a ticket into another status, `Dev` included, and never move a ticket that is in another status (`To do`, `Blocked`, `Rejected`, `Dev`, `QA` and later): report it.
 
 ## Align Ticket Status With PRs
 
@@ -29,16 +27,15 @@ Use this when the user asks to align ticket statuses with their PRs. Follow `ref
    | PRs of the ticket | Target |
    | --- | --- |
    | At least one open, draft or not | `💾 In review` |
-   | All merged, at least one into `develop` | `💾 Dev` |
-   | All merged, into `feature/*` only | `💾 Ready to Dev` |
+   | All merged, into `develop` or `feature/*` | `💾 Ready to Dev` |
    | Closed without merge, or none found | No change: report it |
 
-6. A target that moves the ticket backwards (for example from `Dev` to `In review` because a new PR is open) needs the user's choice: ask.
+6. A target that moves the ticket backwards (for example from `Ready to Dev` to `In review` because a new PR is open) needs the user's choice: ask.
 7. Show the table (ticket, PRs, base, current status, target status). When the user runs the `pdnd-align` skill, do not ask for confirmation of the forward moves.
 8. Move each ticket, then re-read the statuses with JQL `key in (...)` and report them.
 
 ## Moving A Ticket
 
-- Read the transition ids with the Atlassian operation **listJiraIssueTransitions** (tool **executeRead**). In project PIN, `Dev` is id `61` and `Ready to Dev` is id `8`, but check them first.
+- Read the transition ids with the Atlassian operation **listJiraIssueTransitions** (tool **executeRead**). In project PIN, `Ready to Dev` is id `8`, but check it first. If the ticket has no transition to `Ready to Dev`, do not pick another one: report it.
 - Call the tool **executeWrite** with `name: "transitionJiraIssue"` and `inputs: { issueIdOrKey, transitionId: "<id>" }`. The input `transition` is rejected.
 - The harness can block Jira writes that it considers unrequested (for example Claude Code auto mode). If that happens, stop and tell the user. The user's explicit request with the ticket keys unblocks it.

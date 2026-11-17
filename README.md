@@ -8,7 +8,7 @@ Agent skills for PDND Interoperability work. They follow the Agent Skills format
 | --- | --- | --- |
 | `pdnd-context` | Project knowledge: conventions, package map, Git and Jira rules, shared workflow rules. | The agent, automatically, or the user |
 | `pdnd-work` | Completes a Jira ticket from its key: branch, code, tests, draft PR, Jira status. | The user only |
-| `pdnd-align` | Aligns the user's Jira tickets (`In progress`, `In review`, `Ready to Dev`, `Dev`) with their PRs in every pdnd/interop repository. | The user only |
+| `pdnd-align` | Aligns the user's Jira tickets (`In progress`, `In review`, `Ready to Dev`) with their PRs in every pdnd/interop repository. | The user only |
 | `pdnd-sync` | Updates the branches of the user's open PRs with their base and resolves conflicts. | The user only |
 | `pdnd-merge` | Merges the user's PRs that are approved and green, after updating them, and moves their tickets. | The user only |
 | `pdnd-status` | Read-only report on the user's open PRs and their tickets, with the next action for each. | The agent, automatically, or the user |

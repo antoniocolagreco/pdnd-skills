@@ -1,6 +1,6 @@
 ---
 name: pdnd-context
-description: Use when working in the PagoPA PDND Interoperability backend monorepo on TypeScript services, process services, BFF, gateways, routers, validators, domain errors, OpenAPI/protobuf/schema changes, readmodel projections, SQL, Kafka consumers, M2M flows, importers, jobs, new packages, tests, Jira PIN tickets, Jira ticket status (In review, Ready to Dev, Dev) and aligning it with merged PRs, SRS/SERS pages, Confluence page IDs, branch names, commits, PRs, labels, draft PRs, release/hotfix/align branches, merge strategy, Fix Version, CODEOWNERS, bug reproduction, regression tests, failing flows, security/auth bugs, schema drift, or readmodel consistency issues.
+description: Use when working in the PagoPA PDND Interoperability backend monorepo on TypeScript services, process services, BFF, gateways, routers, validators, domain errors, OpenAPI/protobuf/schema changes, readmodel projections, SQL, Kafka consumers, M2M flows, importers, jobs, new packages, tests, Jira PIN tickets, Jira ticket status (In progress, In review, Ready to Dev) and aligning it with merged PRs, SRS/SERS pages, Confluence page IDs, branch names, commits, PRs, labels, draft PRs, release/hotfix/align branches, merge strategy, Fix Version, CODEOWNERS, bug reproduction, regression tests, failing flows, security/auth bugs, schema drift, or readmodel consistency issues.
 ---
 
 # PDND Backend

@@ -30,7 +30,7 @@ A PR is ready only when all of these hold. Read them with `gh pr view <n> --repo
 2. List the user's open PRs in the project repositories and check each against "Ready To Merge".
 3. For a PR that is ready but behind its base or in conflict, update it with the steps of the `pdnd-sync` skill (`../pdnd-sync/SKILL.md`). The push restarts the checks: do not merge it in this run. Report it as "updated, waiting for checks".
 4. Merge each PR that is ready and up to date, with the strategy that `references/git-github.md` sets for its head branch: merge commit (`--merge`) for `release/*` and `align/*`, squash (`--squash`) for every other branch. Use `gh pr merge <n> --repo pagopa/<repo>`, with the PR title as the commit subject. Never use `--admin` and never bypass branch protection.
-5. Move the Jira ticket of each merged PR with "Moving A Ticket" in `references/jira-status.md` (`Dev` for `develop`, `Ready to Dev` for `feature/*`). If the ticket has other PRs still open, leave it and report it.
+5. Move the Jira ticket of each merged PR with "Moving A Ticket" in `references/jira-status.md` (`Ready to Dev`, for both `develop` and `feature/*`). If the ticket has other PRs still open, leave it and report it.
 
 ## Report
 
