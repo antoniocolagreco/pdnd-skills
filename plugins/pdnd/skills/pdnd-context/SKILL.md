@@ -45,6 +45,9 @@ The reader must understand the text at the first read, without effort.
 
 - Run `git branch --show-current` and `git status` before starting and before every commit. The user switches branches outside this session, and stacked PRs give the same file different content. If the code does not match the expected branch, stop and report it.
 - Search `commons`, `models`, `commons-test`, and `readmodel` before writing a helper, schema, type, mock, or error. Reuse what exists.
+- If a sibling method already calls a validator or throws an error for the same check, call the same one. Never write a parallel version, not even inside the same file. Example: `createCertifiedDiscreteAttribute` must call `validateAttributeSeedFields`, which throws `hyperlinkDetectionError`, like the other create methods.
+- The ticket's expected result fixes the behavior: status code, what is rejected, what is saved. It does not fix the wording of the error. "Returns 400 and reports that `name` contains a URL" means "reject `name` with 400", using the existing error.
+- If you think an existing helper or error does not fit the ticket, do not replace it. Stop and ask a separate question: what exists, what is missing, and the options. Never put the deviation inside a plan or a summary for approval.
 - Do not use `any`. Use `unknown` at boundaries and parse with Zod.
 - Use branded IDs from `pagopa-interop-models`, not raw strings. Derive types with `z.infer`.
 - End every `ts-pattern` `match()` with `.exhaustive()`. Error mappers end with `.otherwise(...)`. Use another fallback only if the file already has one. Never satisfy `.exhaustive()` with `[]`, `undefined`, or a no-op just to compile.
