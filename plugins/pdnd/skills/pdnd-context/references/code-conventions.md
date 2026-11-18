@@ -64,6 +64,8 @@ Status codes: 401 for missing or bad credentials, 403 for a forbidden role or ow
 
 ## Feature Flags
 
+Every new feature goes behind a feature flag, unless something prevents it (Confluence page `2136113416`, section 3.1). If the ticket or the SRS does not name the flag, ask.
+
 1. Add `FeatureFlag<Name>Config` to `packages/commons/src/config/featureFlagsConfig.ts`, with env var `FEATURE_FLAG_<NAME>`, default `false`, and key `featureFlag<Name>`. CODEOWNERS restricts this file to the core auth team.
 2. Compose it with `.and(FeatureFlag<Name>Config)` in the config of each package that reads it.
 3. Add `FEATURE_FLAG_<NAME>=true` to the `.env` of that package.

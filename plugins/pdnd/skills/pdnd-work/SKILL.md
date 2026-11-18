@@ -17,7 +17,7 @@ Paths below are relative to the folder that contains this `SKILL.md`. Paths that
 
 1. Run the preflight.
 2. Read the ticket and its linked pages with `references/atlassian-context.md`. The ticket defines the scope: do only what it says.
-3. Decide whether the ticket is ready (`references/jira-tickets.md`, "Reviewing A Ticket"). If not ready, stop and ask with the blockers and the proposed answers.
+3. Decide whether the ticket is ready (`references/jira-tickets.md`, "Reviewing A Ticket"). If not ready, stop and ask with the blockers and the proposed answers. Propose moving the ticket to `💾 Blocked` and contacting the requester (`references/jira-status.md`).
 4. Find the repository and the packages that own the change (`references/package-map.md`). Find the change type and the branch origin (`references/git-github.md`).
 5. In the local clone, follow "Before Starting" in `references/git-github.md`, then create the branch `<prefix>/<KEY>_<short-kebab-description>` from the origin.
 6. Move the ticket to `💾 In progress` and assign it to the user if it has no assignee (`references/jira-status.md`, "Moving A Ticket").
@@ -25,13 +25,14 @@ Paths below are relative to the folder that contains this `SKILL.md`. Paths that
 8. Implement with the guide of the package type and the closest sibling code. Write the tests (`references/testing.md`).
 9. Run the verification, plus `pnpm knip` if exports or dependencies changed and `lint:openapi` if OpenAPI changed.
 10. Check "Before Saying Done" in `../pdnd-context/SKILL.md`.
-11. When the work is finished, commit, push, and open the PR as a draft (`references/git-github.md`): title, template, labels, release label. Set the Fix Version on the ticket.
-12. Move the ticket to `💾 In review` (`references/jira-status.md`, "Moving A Ticket"). Jira automation can do it when the PR opens: re-read the status and move it only if it is still behind.
+11. When the work is finished, commit, push, and open the PR as a draft (`references/git-github.md`): title, template, labels. Add the release label only if the ticket already has a Fix Version. Never set the Fix Version ("Fix Version And Release Label").
+12. The ticket stays in `💾 In progress` while the PR is a draft. If Jira automation moved it to `💾 In review`, report it.
 13. Wait for the checks: `gh pr checks <n> --repo pagopa/<repo> --watch`. They can take a long time: run the wait in the background if the harness supports it. If no check is reported yet, wait one minute and try again.
 14. If a check fails, read its log (`gh run view <run-id> --repo pagopa/<repo> --log-failed`):
     - Caused by the change: fix it, verify, commit, push, and go back to step 13. After three failed rounds, stop and ask.
+    - The release label gate, and the ticket has no Fix Version: expected. Do not add a label: report it.
     - Not caused by the change (flaky test, infrastructure, another team's code): stop and ask. Do not re-run checks or change unrelated code on your own.
-15. When every check passed, verify the other conditions of "Draft To Ready" in `references/git-github.md`. If they all hold, mark the PR ready: `gh pr ready <n> --repo pagopa/<repo>`. Otherwise leave it as a draft and report what is missing.
+15. When every check passed, verify the other conditions of "Draft To Ready" in `references/git-github.md`. If they all hold, mark the PR ready: `gh pr ready <n> --repo pagopa/<repo>`, then move the ticket to `💾 In review` (`references/jira-status.md`, "Moving A Ticket"). Otherwise leave it as a draft and report what is missing.
 
 ## Report
 

@@ -78,7 +78,7 @@ A behavior-preserving refactor says which behavior must not change.
 ## Metadata
 
 - Link dependencies with Jira relations (`blocks`, `is blocked by`, `relates to`), and link the parent or Epic.
-- Set Fix Version before merge. Do not guess it while drafting.
+- Never set the Fix Version: the Mixed Activities Manager sets it (`references/git-github.md`, "Fix Version And Release Label").
 
 ## Reviewing A Ticket
 

@@ -1,6 +1,6 @@
 {
   "name": "pdnd",
-  "version": "1.0.3",
+  "version": "1.0.4",
   "description": "PDND Interoperability: project context and workflows (work a ticket, align Jira, sync and merge PRs)",
   "author": { "name": "Antonio Colagreco" }
 }

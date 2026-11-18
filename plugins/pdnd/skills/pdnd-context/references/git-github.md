@@ -1,10 +1,10 @@
 # Git, GitHub, And Jira Metadata
 
-Source: Manuale di Integrazione GitHub-Jira (Confluence page `1900806152`), plus the CI workflows. Never add AI authorship text anywhere: see the rule at the top of `SKILL.md`.
+Source: Manuale di Integrazione GitHub-Jira (Confluence page `1900806152`), "[DRAFT] Gestione delle Mixed Activities" (page `3418685526`), "[DRAFT] Processo di sviluppo" (page `2136113416`), plus the CI workflows. Never add AI authorship text anywhere: see the rule at the top of `SKILL.md`.
 
 ## Before Starting
 
-Collect the Jira key, a short English description, the change type, the affected packages, and the release label. Ask for everything missing in one question.
+Collect the Jira key, a short English description, the change type, and the affected packages. Ask for everything missing in one question. Read the Fix Version from the ticket: never ask for it and never choose it (see "Fix Version And Release Label").
 
 If the task involves a commit, push, or PR:
 
@@ -121,24 +121,35 @@ Required on every PR. Never invent a label: check with `gh label list`.
 - **Type:** one that exists: `bug`, `hotfix`, `chore`, `refactor`, `feature-branch`.
 - **Activity:** for example `archiviazione`, `api-v3`, `catalogo-privato`.
 - **Service:** for example `catalog-process`, `bff`.
-- **Release:** `x.y.z`.
+- **Release:** `x.y.z`, only when the ticket already has a Fix Version. See "Fix Version And Release Label".
 
 A PR to `develop` fails `.github/workflows/release-version-validation.yaml` unless the release label equals `ALLOWED_RELEASE_TOWARDS_DEVELOP_BRANCH`. Read the value in that file on `develop`. Only a PR titled exactly `align/x.y.z` skips this check.
+
+## Fix Version And Release Label
+
+Source: page `3418685526` (phases 0 and 5) and the team lead. The Manuale's step "Imposta Fix Version su Jira" for the developer is outdated.
+
+- Never set or change the Fix Version on Jira. The Mixed Activities Manager sets it, after the evaluation with QA and the insertion in a sprint.
+- The ticket already has a Fix Version: add the release label with that exact value.
+- The ticket has no Fix Version: add no release label, even if the release gate fails. Whoever sets the Fix Version adds the label. Report the failing gate as expected, never fix it.
+- Never pick the release from `ALLOWED_RELEASE_TOWARDS_DEVELOP_BRANCH`. A Fix Version different from it is the team's decision: report it.
+- An urgent bug needs a release now: stop and tell the user to agree it first with the team lead.
 
 ## Jira And Merge
 
 - Link the branch and the PR to the issue.
 - Fix Version is mandatory before merge and matches the release label.
-- At least one approval from CODEOWNERS (see `CODEOWNERS`).
+- Approval: at least one PagoPA Codeowner, or one external Codeowner plus one internal developer not involved in the feature (the internal developer can be skipped for an urgent or very small PR). A Codeowner does not approve PRs of their own feature team. This also applies to merges into a `feature/*` branch.
 - Move the PR from Draft to ready only when verification is complete (see "Draft To Ready").
+- After answering or fixing review comments, request the review again from each reviewer: `gh pr edit <n> --repo pagopa/<repo> --add-reviewer <login>`.
 
 ## Draft To Ready
 
 The Manuale opens every PR as a draft and moves it to review "if everything is ok". Ready means a reviewer can approve it without asking for changes you could have caught. All of these must hold:
 
-- Every check on the last commit passed, including the release label gate.
+- Every check on the last commit passed. Only exception: the release label gate, when the ticket has no Fix Version yet.
 - The branch is up to date with its base and has no conflicts.
-- Title, template, labels, and the Jira Fix Version are complete and final.
+- Title, template, and labels are complete and final. The release label is present only if the ticket has a Fix Version.
 - The diff contains only the ticket's scope: no debug code, no unrelated changes.
 - The local verification is done: tests for the change, typecheck, lint, and `knip` or `lint:openapi` when they apply.
 
@@ -149,7 +160,7 @@ The `pdnd-work` skill waits for the checks and marks the PR ready when all of th
 1. `git branch --show-current`.
 2. `pnpm lint:autofix` and `pnpm check` in each modified package.
 3. No AI authorship text and no em dash in the message.
-4. For a PR: template, labels, Fix Version.
+4. For a PR: template, labels, release label only if the ticket has a Fix Version.
 
 ## Output For Git Metadata
 
@@ -160,6 +171,6 @@ Branch: bugfix/PIN-456_fix-thing
 Commit / PR title: fix: fix thing (PIN-456)
 Origin -> Merge: develop -> Squash Merge on develop
 PR: Draft
-Labels: type=<type>, activity=<activity>, service=<service>, release=<version>
-Fix Version: <version or ask user>
+Labels: type=<type>, activity=<activity>, service=<service>, release=<Fix Version, or none>
+Fix Version: <from the ticket, or "not set: decided by the team">
 ```

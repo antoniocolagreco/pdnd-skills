@@ -25,12 +25,12 @@ Paths below are relative to the folder that contains this `SKILL.md`. Paths that
    - Checks: passed, failed (name the failing check), or pending.
    - Review: approved, changes requested, or waiting.
    - Branch: up to date, behind, or in conflict.
-   - Metadata: missing labels, release label that does not match the gate, missing or different Fix Version.
+   - Metadata: missing labels; release label missing while the ticket has a Fix Version, or different from it. A ticket without Fix Version is not the user's action: report "waiting for Fix Version", and its failing release gate as expected.
    - Ticket: current status and the status it should have (`references/jira-status.md`).
    - Next action, the first that applies:
      1. Conflict or behind: `pdnd-sync`.
      2. Failed check: fix the cause.
-     3. Missing metadata: complete labels or Fix Version.
+     3. Missing metadata: complete the labels. Never set the Fix Version.
      4. Ticket in the wrong status: `pdnd-align`.
      5. Draft with every "Draft To Ready" condition met: mark it ready.
      6. Ready, approved, checks passed: `pdnd-merge`.
